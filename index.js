@@ -72,4 +72,29 @@ server.use("/bot/webhook", bot_express({
     }
 }));
 
+server.use("/webhook", (req, res, next)=>{
+
+    let session_client = new dialogflow.SessionsClient({
+                    project_id: process.env.GOOGLE_PROJECT_ID,
+                    credentials: {
+                        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+                        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
+                    }
+                        });
+                        const responses = await session_client.detectIntent({
+                            session: "projects/pizza-bot-hfpfpi/agent/sessions/dfMessenger-54708847",
+                            queryInput: {
+                                text: {
+                                    text: "できます",
+                                    languageCode: "ja"
+                                }
+                            }
+                        });
+                        let jsontext = JSON.stringify(responses);
+                        debug(`responses 1full:`+jsontext);
+                        return;
+    });
+ 
+
+
 module.exports = server;

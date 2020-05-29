@@ -65,25 +65,7 @@ module.exports = class SkillHumanResponse {
         // ### Tasks Overview ###
         // -> Reply to administrator.
         // -> Send message to original user.
-        let session_client = new dialogflow.SessionsClient({
-            project_id: process.env.GOOGLE_PROJECT_ID,
-            credentials: {
-                client_email: process.env.GOOGLE_CLIENT_EMAIL,
-                private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
-            }
-        });
-        let session_path = sessions_client.sessionPath(process.env.GOOGLE_PROJECT_ID, process.env.GOOGLE_PROJECT_ID);
-        const responses = await session_client.detectIntent({
-            session: session_path,
-            queryInput: {
-                text: {
-                    text: "できます",
-                    languageCode: "ja"
-                }
-            }
-        });
-        let jsontext = JSON.stringify(responses);
-        debug(`responses 1full:`+jsontext);
+        
         // // -> Reply to administrator.
         // tasks.push(bot.reply({
         //     type: "text",

@@ -81,7 +81,7 @@ server.use("/webhook", (req, res, next)=>{
                         private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
                     }
                         });
-                        const responses = await session_client.detectIntent({
+                        let responses = session_client.detectIntent({
                             session: "projects/pizza-bot-hfpfpi/agent/sessions/dfMessenger-54708847",
                             queryInput: {
                                 text: {

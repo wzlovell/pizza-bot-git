@@ -65,21 +65,40 @@ module.exports = class SkillHumanResponse {
         // ### Tasks Overview ###
         // -> Reply to administrator.
         // -> Send message to original user.
-
-        // -> Reply to administrator.
-        tasks.push(bot.reply({
-            type: "text",
-            text: "いただいた内容でユーザーへ返信しておきます。"
-        }));
-
-        // -> Reply to original user.
-        tasks.push(bot.send(context.confirmed.user.id, {
-            type: "text",
-            text: context.confirmed.answer
-        }, context.confirmed.user.language));
-
-        return Promise.all(tasks).then((response) => {
-            return resolve();
+        let session_client = new dialogflow.SessionsClient({
+            project_id: process.env.GOOGLE_PROJECT_ID,
+            credentials: {
+                client_email: process.env.GOOGLE_CLIENT_EMAIL,
+                private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
+            }
         });
+        let session_path = sessions_client.sessionPath(process.env.GOOGLE_PROJECT_ID, process.env.GOOGLE_PROJECT_ID);
+        const responses = await session_client.detectIntent({
+            session: session_path,
+            queryInput: {
+                text: {
+                    text: "できます",
+                    languageCode: "ja"
+                }
+            }
+        });
+        let jsontext = JSON.stringify(responses);
+        debug(`responses 1full:`+jsontext);
+        // // -> Reply to administrator.
+        // tasks.push(bot.reply({
+        //     type: "text",
+        //     text: "いただいた内容でユーザーへ返信しておきます。"
+        // }));
+
+        // // -> Reply to original user.
+        // tasks.push(bot.send(context.confirmed.user.id, {
+        //     type: "text",
+        //     text: context.confirmed.answer
+        // }, context.confirmed.user.language));
+
+        // return Promise.all(tasks).then((response) => {
+        //     return resolve();
+        // });
+        return;
     }
 };

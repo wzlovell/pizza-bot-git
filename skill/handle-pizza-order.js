@@ -10,12 +10,12 @@ module.exports = class SkillHandlePizzaOrder {
             pizza: {
                 message: {
                     type: "template",
-                    altText: "ご注文のピザはお決まりでしょうか？ マルゲリータ、マリナーラからお選びください。",
+                    altText: "ご注文のピザはお決まりでしょうか？ マルグリット、マリナーラからお選びください。",
                     template: {
                         type: "buttons",
                         text: "ご注文のピザはお決まりでしょうか？",
                         actions: [
-                            {type:"message",label:"マルゲリータ",text:"マルゲリータ"},
+                            {type:"message",label:"マルグリット",text:"マルグリット"},
                             {type:"message",label:"マリナーラ",text:"マリナーラ"}
                         ]
                     }

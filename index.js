@@ -5,6 +5,7 @@
  */
 const server = require("express")();
 const bot_express = require("bot-express");
+const dialogflow = require("dialogflow");
 
 /** 
  * Middleware Configuration

@@ -61,7 +61,7 @@ module.exports = class SkillHumanResponse {
     finish(bot, event, context, resolve, reject){
         // Promise List.
         let tasks = [];
-
+        debug("human-response finish");
         // ### Tasks Overview ###
         // -> Reply to administrator.
         // -> Send message to original user.
